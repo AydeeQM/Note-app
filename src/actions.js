@@ -7,6 +7,7 @@ export const addComment = (comment) => {
    localStorage.setItem("Mynote", arJson);
    let getNewList = JSON.parse( localStorage.getItem("Mynote") );
    store.setState({
+    initialItems: getNewList,
     items: getNewList
    });
 
@@ -37,12 +38,14 @@ export function componentWillMount () {
 };
 
 export const removeComment = (index) => {
-    let getNewList = JSON.parse( localStorage.getItem("Mynote") );
+    //let getNewList = JSON.parse( localStorage.getItem("Mynote") );
+    let getNewList = [...store.getState().items];
     getNewList.forEach(function (item, id, arr) {
         if (item === getNewList[index]) {
             getNewList.splice(index, 1);
         }
     });
+    store.setState({items: getNewList})
     console.log(getNewList.length);
     console.log(getNewList)
     console.log(index)
