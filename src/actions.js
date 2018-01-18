@@ -1,5 +1,6 @@
 import store from './store';
 
+
 export const addComment = (comment) => {
    let oldList = [...store.getState().initialItems];
    const newList = oldList.concat(comment);
@@ -10,15 +11,11 @@ export const addComment = (comment) => {
     initialItems: getNewList,
     items: getNewList
    });
-
-   console.log(newList);
-   console.log('obteniendo', getNewList);
-   console.log('cantidad de datos', localStorage.length);
 };
 
 export const filterList = (event) => {
-    //let updatedList = [...store.getState().initialItems];
-    let updatedList = JSON.parse( localStorage.getItem("Mynote") );
+    let updatedList = [...store.getState().initialItems];
+    //let updatedList = JSON.parse( localStorage.getItem("Mynote") );
     if(updatedList.length > 0){
         updatedList = updatedList.filter(function(item){
             return item.toLowerCase().search(
@@ -32,22 +29,28 @@ export const filterList = (event) => {
 };
 
 export function componentWillMount () {
-    //let newList = [...store.getState().initialItems];
-    let newList = JSON.parse( localStorage.getItem("Mynote") );
-    store.setState({items: newList})
+    let newList = [...store.getState().initialItems];
+    let newListast = JSON.parse( localStorage.getItem("Mynote") );
+    if(newList.length !== null){
+        store.setState({items: newListast})
+    } else if (newListast.length !== null){
+        store.setState({items: newListast})
+    }
+    //let newList = JSON.parse( localStorage.getItem("Mynote") );
 };
 
 export const removeComment = (index) => {
     //let getNewList = JSON.parse( localStorage.getItem("Mynote") );
     let getNewList = [...store.getState().items];
+    if(getNewList.length > 0){
     getNewList.forEach(function (item, id, arr) {
         if (item === getNewList[index]) {
             getNewList.splice(index, 1);
         }
     });
     store.setState({items: getNewList})
-    console.log(getNewList.length);
-    console.log(getNewList)
-    console.log(index)
-    console.log(getNewList[index])
+    } else {
+        localStorage.removeItem('Mynote');
+        store.setState({items: getNewList})
+    }
 }
