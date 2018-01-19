@@ -5,7 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from "redux-zero/react";
 import store from "./store";
-import { componentWillMount } from './actions';
+import { componentWillMount, componentDidMount, componentWillUnmount } from './actions';
 
 componentWillMount();
 const Index = () => (
@@ -13,5 +13,7 @@ const Index = () => (
         <App />
     </Provider>
 );
+componentDidMount();
+componentWillUnmount();
 ReactDOM.render(<Index />, document.getElementById('root'));
 registerServiceWorker();
