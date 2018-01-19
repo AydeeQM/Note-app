@@ -31,7 +31,8 @@ export const filterList = (event) => {
 export function componentWillMount () {
     let newList = [...store.getState().initialItems];
     let newListast = JSON.parse( localStorage.getItem("Mynote") );
-    if(newList.length > 1 || newList.length !== null ){
+
+    if(newListast.length !== null){
         store.setState({items: newListast})
     } else{
         store.setState({items: newList})
