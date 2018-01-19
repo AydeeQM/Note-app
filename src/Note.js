@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { addComment, removeComment, filterList } from './actions';
 import { connect } from 'redux-zero/react';
-import './App.css';
+import './css/style.css'; 
 
 const List = ({item, index}) => {
 	return (
-    <div className="data">
-		<div className="lista">
-            <p>{item}</p>
-            <button className="delete" onClick={() => removeComment(index)}>Remove Comment</button>
-		</div>
-    </div>
+		<li className="draggable" draggable="true">
+            {item}
+            <button className="delete" onClick={() => removeComment(index)}><i className="fa fa-trash"></i></button>
+		</li>
 	);
 }
 
@@ -32,22 +30,23 @@ const FilteredList = ({items, index}) => {
       })
       return (
         <div className="filter-list">
-                <form onSubmit={onSubmit}>
-                <div className="inner-wrap">
-                    <label>Add Notes
+            <form onSubmit={onSubmit}>
+                <div className="adder">
                     <input
                         type="text"
+                        className="input"
                         name="name"
                         placeholder="Search"
                         ref={e => (this.refInput = e)}
                         onChange={(e) => filterList(e)}
                     />
-                    </label>
-                    <input type="submit" name="submit" value="Add Note"/>
+                    {/* <input className="add" type="submit" name="submit" value="+"/> */}
+                    <button className="add" type="submit" name="submit"><i className="fa fa-fw fa-plus"></i></button>
                 </div>
             </form>
-            {/* <input type="text" placeholder="Search" onChange={(e) => filterList(e)}/> */}
-            {listComponent}
+            <ul>
+                {listComponent}
+            </ul>
         </div>
       );
   };
