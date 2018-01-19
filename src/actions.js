@@ -1,6 +1,6 @@
 import store from './store';
 
-export function componentWillMount () {
+/* export function componentWillMount () {
     if(JSON.parse( localStorage.getItem("Mynote") ).length >=1){
         store.setState({
             items: JSON.parse( localStorage.getItem("Mynote") )
@@ -11,7 +11,7 @@ export function componentWillMount () {
             items: newList
         });
     }
-};
+}; */
 
 export function componentDidMount(){
     if(JSON.parse( localStorage.getItem("Mynote") ).length >=1){
@@ -25,20 +25,6 @@ export function componentDidMount(){
         });
     }
   }
-
-export function componentWillUnmount(){
-    if(JSON.parse( localStorage.getItem("Mynote") ).length >=1){
-        store.setState({
-            items: JSON.parse( localStorage.getItem("Mynote") )
-        });
-    } else{
-        const newList = [...store.getState().initialItems];
-        store.setState({
-            items: newList
-        });
-    }
-  }
-
 export const addComment = (comment) => {
    let oldList = [...store.getState().initialItems];
    const newList = oldList.concat(comment);
