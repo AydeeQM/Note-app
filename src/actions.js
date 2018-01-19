@@ -32,7 +32,7 @@ export function componentWillMount () {
     let newList = [...store.getState().initialItems];
     let newListast = JSON.parse( localStorage.getItem("Mynote") );
 
-    if(newListast.length !== undefined){
+    if(newListast.length > 0){
         store.setState({items: newListast})
     } else{
         store.setState({items: newList})
