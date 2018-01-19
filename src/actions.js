@@ -29,11 +29,20 @@ export const filterList = (event) => {
 };
 
 export function componentWillMount () {
-    let newList = [...store.getState().initialItems];
-    let newListast = JSON.parse( localStorage.getItem("Mynote") );
+    if(JSON.parse( localStorage.getItem("Mynote") ).length >=1){
+        store.setState({
+            items: JSON.parse( localStorage.getItem("Mynote") )
+        });
+    } else{
+        const newList = [...store.getState().initialItems];
+        store.setState({
+            items: newList
+        });
+    }
+    
 
-    (newListast.length) >= 1 ? store.setState({items: newListast}):store.setState({items: newList});
-    console.log('numero!!!',newListast.length );
+
+    /* store.setState({items: (newListast.length) >= 1 ? newListast : newList}) */
     //let newList = JSON.parse( localStorage.getItem("Mynote") );
 };
 

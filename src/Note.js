@@ -21,6 +21,7 @@ const FilteredList = ({items, index}) => {
        }
         
      };
+     let newListast = JSON.parse( localStorage.getItem("Mynote") );
     const listComponent =  items.map ( (item, index) => {
         return <List
             key = {index}
