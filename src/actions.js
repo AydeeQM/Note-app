@@ -5,7 +5,7 @@ export function componentWillMount () {
     let getNewList = [...store.getState().items];
 
     store.setState({
-        items: comNewList.length > 0? comNewList:getNewList
+        items: comNewList ? comNewList:getNewList
     });
 };
 
