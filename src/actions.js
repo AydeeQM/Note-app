@@ -32,11 +32,8 @@ export function componentWillMount () {
     let newList = [...store.getState().initialItems];
     let newListast = JSON.parse( localStorage.getItem("Mynote") );
 
-    if(newListast.length > 0){
-        store.setState({items: newListast})
-    } else{
-        store.setState({items: newList})
-    }
+    (newListast.length) >= 1 ? store.setState({items: newListast}):store.setState({items: newList});
+    console.log('numero!!!',newListast.length );
     //let newList = JSON.parse( localStorage.getItem("Mynote") );
 };
 
